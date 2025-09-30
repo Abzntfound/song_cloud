@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>IBM Lyrical Song Cloud</title>
+  <link rel="icon" type="image/jpeg" href="favicon.ico">
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; text-align: center;}
+    h1 {font-size: 2rem;}
+    p {font-size: large;}
+    input { width: 300px; padding: 8px; margin: 5px 0;}
+    ul { list-style-type: none; padding: 0; }
+    li { margin: 5px 0; }
+    a { text-decoration: none; color: blue; }
+    a:hover { text-decoration: underline; }
+    hr {background-color: black; height: 0.5rem; box-shadow: 0 0 10px black}
+    footer {background-color: black; color: white; position: fixed; bottom: 0; left: 0; width: 100%; text-align: center; padding: 5px;}
+    #header {color: black; background-color: white; position: fixed; top: 0; left: 0; width: 100%; padding: 5px 15px; font-family: "Poppins", sans-serif; display: flex; gap: 59rem; align-items: center; border-bottom: 1px solid #ccc;}
+    #Entrance {color: black; text-align: center; margin-top: 6rem;}
+    #song {border: 0.6rem black; padding: 10px;}
+    #loginForm, #registerForm, #developerPortal { display: none; margin-top: 7rem; }
+    #developerPortal textarea { width: 80%; height: 300px; }
+    #header .left { font-weight: bold; }
+    #header .right { font-size: 0.9rem; color: #555; }
+    a:link, a:visited, a:hover, a:active {color: black;}
+  </style>
+</head>
+<body>
+
+<div id="header"> 
+  <h3 class="left"><a href="search.html">IBM SONG CLOUD</a></h3>
+  <h5 class="right"><a href="#log_in" onclick="showLogin()">Log in</a></h5>
+</div>
+
+<!-- Login Form -->
+<div id="loginForm">
+  <h3>Login</h3>
+  <input type="text" id="username" placeholder="Username"><br>
+  <input type="password" id="password" placeholder="Password"><br>
+  <button onclick="login()">Log In</button><br>
+  <p><a href="#" onclick="showRegister()">Create new account</a></p>
+</div>
+
+<!-- Registration Form -->
+<div id="registerForm">
+  <h3>Create Account</h3>
+  <input type="text" id="regUsername" placeholder="Username"><br>
+  <input type="password" id="regPassword" placeholder="Password"><br>
+  <button onclick="register()">Register</button><br>
+  <p><a href="#" onclick="showLogin()">Back to login</a></p>
+</div>
+
+<!-- Main Content for Users -->
+<div id="Entrance">
+  <h1>Welcome to IBM's Lyrical Song Cloud!</h1>
+  <p>Begin by searching the song you want: </p>
+  <h2>Song Search</h2>
+  <input type="text" id="searchBox" placeholder="Type to search..." onkeyup="searchSites()">
+  <ul id="results"></ul>
+</div>
+
+<!-- Song Links -->
+<div id="song">
+  <script>
+    const sites = [
+      { name: "Finally Song", url: "finally.html", target: "_blank"},
+      { name: "Fire", url: "fire.html", target: "_blank"},
+      { name: "It is raining", url: "it_is_raining.html", target: "_blank"},
+      { name: "", url: "products.html", target: "_blank"},
+      { name: "", url: "profile.html", target: "_blank"}
+    ];
+
+    function searchSites() {
+      const input = document.getElementById("searchBox").value.toLowerCase();
+      const results = document.getElementById("results");
+      results.innerHTML = ""; 
+      if (input.length === 0) return; 
+      const matches = sites.filter(site => site.name.toLowerCase().startsWith(input));
+      matches.forEach(site => {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.href = site.url;
+        a.textContent = site.name;
+        if (site.target) a.target = site.target;
+        li.appendChild(a);
+        results.appendChild(li);
+      });
+    }
+  </script>
+</div>
+
+<!-- Developer Portal -->
+<div id="developerPortal">
+  <h3>Developer Portal</h3>
+  <p>Edit the page code below and save changes:</p>
+  <textarea id="codeEditor"></textarea><br>
+  <button onclick="saveCode()">Save Changes</button>
+</div>
+
+<footer>©IBM Church Rights Reserved</footer>
+
+<script>
+  // Users storage with localStorage
+  let users = JSON.parse(localStorage.getItem('users')) || [
+    { username: "user1", password: "1234", role: "user" },
+    { username: "dev", password: "devpass", role: "developer" }
+  ];
+
+  function showLogin() {
+    document.getElementById('loginForm').style.display = 'block';
+    document.getElementById('registerForm').style.display = 'none';
+  }
+
+  function showRegister() {
+    document.getElementById('registerForm').style.display = 'block';
+    document.getElementById('loginForm').style.display = 'none';
+  }
+
+  function login() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const user = users.find(u => u.username === username && u.password === password);
+
+    if (!user) {
+      alert('Invalid username or password');
+      return;
+    }
+
+    document.getElementById('loginForm').style.display = 'none';
+
+    if (user.role === 'developer') {
+      document.getElementById('Entrance').style.display = 'none';
+      document.getElementById('song').style.display = 'none';
+      document.getElementById('developerPortal').style.display = 'block';
+      document.getElementById('codeEditor').value = document.documentElement.innerHTML;
+    } else {
+      alert('Logged in as normal user!');
+    }
+  }
+
+  function register() {
+    const username = document.getElementById('regUsername').value;
+    const password = document.getElementById('regPassword').value;
+
+    if (!username || !password) {
+      alert("Please fill in all fields");
+      return;
+    }
+
+    if (users.find(u => u.username === username)) {
+      alert("Username already exists");
+      return;
+    }
+
+    const newUser = { username: username, password: password, role: "user" };
+    users.push(newUser);
+    localStorage.setItem('users', JSON.stringify(users));
+
+    alert("Account created! You can now log in.");
+    document.getElementById('registerForm').style.display = 'none';
+    document.getElementById('loginForm').style.display = 'block';
+  }
+
+  function saveCode() {
+    const code = document.getElementById('codeEditor').value;
+    const newWindow = window.open();
+    newWindow.document.open();
+    newWindow.document.write(code);
+    newWindow.document.close();
+    alert('Code preview opened in new window!');
+  }
+</script>
+
+</body>
+</html>
