@@ -9,28 +9,21 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 
-  <!-- SEO -->
-  <meta name="description" content="IBM Lyrical Song Cloud – Explore and stream your favorite songs with lyrics online. Discover new music and enjoy lyrical experiences.">
+  <!-- SEO & Social -->
+  <meta name="description" content="IBM Lyrical Song Cloud – Explore and stream your favorite songs with lyrics online.">
   <meta name="keywords" content="IBM Lyrical Song Cloud, music, lyrics, songs, streaming, online music, playlists">
   <meta name="author" content="Your Name or Username">
-
-  <!-- Social Sharing -->
   <meta property="og:title" content="IBM Lyrical Song Cloud">
-  <meta property="og:description" content="IBM Lyrical Song Cloud – Explore and stream your favorite songs with lyrics online.">
+  <meta property="og:description" content="Explore and stream your favorite songs with lyrics online.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://yourusername.github.io/ibmsound">
   <meta property="og:image" content="cover-image.jpg">
-
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="IBM Lyrical Song Cloud">
   <meta name="twitter:description" content="Explore and stream your favorite songs with lyrics online.">
   <meta name="twitter:image" content="cover-image.jpg">
-
-  <!-- Mobile -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Styles -->
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -42,13 +35,11 @@
       animation: bgMove 15s ease infinite;
       padding-top: 5rem;
     }
-
     @keyframes bgMove {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-
     h1 { font-size: 2rem; }
     p { font-size: large; }
     input { width: 300px; padding: 8px; margin: 5px 0; }
@@ -74,7 +65,6 @@
       padding: 5px;
     }
 
-    /* Header */
     #header {
       color: black;
       background-color: #6d3621;
@@ -83,7 +73,6 @@
       left: 0;
       width: 100%;
       padding: 10px 20px;
-      font-family: "Poppins", sans-serif;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -93,20 +82,12 @@
     }
 
     #Entrance { margin-top: 6rem; color: black; text-align: center; }
-
     #song { padding: 10px; }
 
-    #loginForm, #registerForm, #developerPortal {
-      display: none;
-      margin-top: 7rem;
-    }
+    #loginForm, #registerForm, #developerPortal, #addSongsSection { display: none; margin-top: 7rem; }
 
-    #developerPortal textarea {
-      width: 80%;
-      height: 300px;
-    }
+    #developerPortal textarea, #addSongsSection textarea { width: 80%; height: 300px; }
 
-    /* Gradient Button */
     .gradient-btn {
       border: 2px solid white;
       background: linear-gradient(to right, #5C2B18 10%, #000000 90%);
@@ -118,12 +99,9 @@
       cursor: pointer;
       text-decoration: none;
       transition: all 0.3s ease;
+      margin: 3px;
     }
-
-    .gradient-btn:hover {
-      background: linear-gradient(to right, #000000 10%, #5C2B18 90%);
-      transform: translateY(-2px);
-    }
+    .gradient-btn:hover { background: linear-gradient(to right, #000000 10%, #5C2B18 90%); transform: translateY(-2px);}
   </style>
 </head>
 <body>
@@ -167,7 +145,7 @@
 <!-- Song Links -->
 <div id="song">
   <script>
-    const sites = [
+    let sites = JSON.parse(localStorage.getItem('songs')) || [
       { name: "Finally Song", url: "Finally.html", target: "_blank" },
       { name: "Fire", url: "fire.html", target: "_blank" },
       { name: "It is raining", url: "it_is_raining.html", target: "_blank" },
@@ -179,7 +157,7 @@
       const input = document.getElementById("searchBox").value.toLowerCase();
       const results = document.getElementById("results");
       results.innerHTML = "";
-      if (input.length === 0) return;
+      if (!input) return;
       const matches = sites.filter(site => site.name.toLowerCase().startsWith(input));
       matches.forEach(site => {
         const li = document.createElement("li");
@@ -199,13 +177,48 @@
   <h3>Developer Portal</h3>
   <p>Edit the page code below and save changes:</p>
   <textarea id="codeEditor"></textarea><br>
-  <button onclick="saveCode()">Save Changes</button>
+  <button onclick="saveCode()">Preview Changes</button>
 </div>
+
+<!-- Add Songs Section -->
+<div id="addSongsSection" class="animate">
+  <h3>Add New Songs</h3>
+  <textarea id="songTemplateEditor">
+<input type="text" id="songTitle" placeholder="Song Title"><br>
+<textarea id="songLyrics" placeholder="Enter lyrics here..."></textarea><br>
+<input type="text" id="songLink" placeholder="Optional: Song URL"><br>
+<button onclick="addSong()">Add Song</button>
+<div id="songList"></div>
+<script>
+let songs = JSON.parse(localStorage.getItem('songs')) || [];
+function addSong(){
+  const title=document.getElementById('songTitle').value.trim();
+  const lyrics=document.getElementById('songLyrics').value.trim();
+  const link=document.getElementById('songLink').value.trim();
+  if(!title||!lyrics){alert('Fill title & lyrics'); return;}
+  songs.push({title,lyrics,link});
+  localStorage.setItem('songs', JSON.stringify(songs));
+  renderSongs();
+}
+function renderSongs(){
+  const list=document.getElementById('songList'); list.innerHTML='';
+  songs.forEach((s,i)=>{
+    const div=document.createElement('div');
+    div.innerHTML='<h3>'+s.title+'</h3><p>'+s.lyrics+'</p>'+ (s.link?'<a href="'+s.link+'" target="_blank">Listen</a>':'') +'<hr>';
+    list.appendChild(div);
+  });
+}
+renderSongs();
+</script>
+  </textarea><br>
+  <button class="gradient-btn" onclick="previewSongTemplate()">Preview Template</button>
+  <button class="gradient-btn" onclick="saveSongTemplate()">Save Songs</button>
+</div>
+
 
 <!-- Footer -->
 <footer>© IBM Church Rights Reserved</footer>
 
-<!-- Scripts -->
 <script>
   // Users storage
   let users = JSON.parse(localStorage.getItem('users')) || [
@@ -213,89 +226,96 @@
     { username: "dev", password: "devpass", role: "developer" }
   ];
 
-  function showLogin() {
-    document.getElementById('loginForm').style.display = 'block';
-    document.getElementById('registerForm').style.display = 'none';
-  }
+  function showLogin() { document.getElementById('loginForm').style.display='block'; document.getElementById('registerForm').style.display='none'; }
+  function showRegister() { document.getElementById('registerForm').style.display='block'; document.getElementById('loginForm').style.display='none'; }
 
-  function showRegister() {
-    document.getElementById('registerForm').style.display = 'block';
-    document.getElementById('loginForm').style.display = 'none';
-  }
-
-  function login() {
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-    const user = users.find(u => u.username === username && u.password === password);
-
-    if (!user) {
-      alert('Invalid username or password');
-      return;
-    }
-
-    document.getElementById('loginForm').style.display = 'none';
-
-    if (user.role === 'developer') {
-      document.getElementById('Entrance').style.display = 'none';
-      document.getElementById('song').style.display = 'none';
-      document.getElementById('developerPortal').style.display = 'block';
-      document.getElementById('codeEditor').value = document.documentElement.innerHTML;
+  function login(){
+    const username=document.getElementById('username').value;
+    const password=document.getElementById('password').value;
+    const user=users.find(u=>u.username===username && u.password===password);
+    if(!user){alert('Invalid username or password'); return;}
+    document.getElementById('loginForm').style.display='none';
+    if(user.role==='developer'){
+      document.getElementById('Entrance').style.display='none';
+      document.getElementById('song').style.display='none';
+      document.getElementById('developerPortal').style.display='block';
+      document.getElementById('codeEditor').value=document.documentElement.innerHTML;
+      document.getElementById('addSongsSection').style.display='block';
     } else {
       alert('Logged in as normal user!');
-      document.getElementById('Entrance').style.display = 'block';
-      document.getElementById('song').style.display = 'block';
+      document.getElementById('Entrance').style.display='block';
+      document.getElementById('song').style.display='block';
     }
   }
 
-  function register() {
-    const username = document.getElementById('regUsername').value;
-    const password = document.getElementById('regPassword').value;
-
-    if (!username || !password) {
-      alert("Please fill in all fields");
-      return;
-    }
-
-    if (users.find(u => u.username === username)) {
-      alert("Username already exists");
-      return;
-    }
-
-    const newUser = { username, password, role: "user" };
-    users.push(newUser);
-    localStorage.setItem('users', JSON.stringify(users));
-
+  function register(){
+    const username=document.getElementById('regUsername').value;
+    const password=document.getElementById('regPassword').value;
+    if(!username||!password){alert("Please fill in all fields"); return;}
+    if(users.find(u=>u.username===username)){alert("Username already exists"); return;}
+    users.push({username,password,role:"user"});
+    localStorage.setItem('users',JSON.stringify(users));
     alert("Account created! You can now log in.");
-    document.getElementById('registerForm').style.display = 'none';
-    document.getElementById('loginForm').style.display = 'block';
+    document.getElementById('registerForm').style.display='none';
+    document.getElementById('loginForm').style.display='block';
   }
 
-  function saveCode() {
-    const code = document.getElementById('codeEditor').value;
-    const newWindow = window.open();
-    newWindow.document.open();
-    newWindow.document.write(code);
-    newWindow.document.close();
+  function saveCode(){
+    const code=document.getElementById('codeEditor').value;
+    const win=window.open();
+    win.document.open();
+    win.document.write(code);
+    win.document.close();
     alert('Code preview opened in new window!');
   }
 
+  function previewSongTemplate(){
+    const code=document.getElementById('songTemplateEditor').value;
+    const win=window.open();
+    win.document.open();
+    win.document.write(code);
+    win.document.close();
+  }
+
+  function saveSongTemplate(){
+  try{
+    // Execute the template code
+    eval(document.getElementById('songTemplateEditor').value);
+    
+    // Ask for filename
+    let fileName = prompt("Name this file (without extension):", "example");
+    if(!fileName) return alert("Save cancelled!");
+    if(!fileName.endsWith(".html")) fileName += ".html";
+    
+    // Save to database (localStorage)
+    let db = JSON.parse(localStorage.getItem('songFiles')) || {};
+    db[fileName] = document.getElementById('songTemplateEditor').value;
+    localStorage.setItem('songFiles', JSON.stringify(db));
+    
+    alert(`Songs saved as "${fileName}"!`);
+  } catch(e){
+    console.error(e);
+    alert('Error saving songs.');
+  }
+}
+
+  // Show Add Songs section
+  document.querySelector('#header a[href="#addSongs"]').addEventListener('click',function(e){
+    e.preventDefault();
+    document.getElementById('addSongsSection').style.display='block';
+  });
+
   // GSAP Animations
   gsap.registerPlugin(ScrollTrigger);
-  gsap.utils.toArray(".animate").forEach(el => {
-    gsap.from(el, {
-      y: 100,
-      opacity: 0,
-      duration: 1,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: el,
-        start: "top 80%",
-        toggleActions: "play none none none",
-        once: true
-      }
+  gsap.utils.toArray(".animate").forEach(el=>{
+    gsap.from(el,{
+      y:100,
+      opacity:0,
+      duration:1,
+      ease:"power3.out",
+      scrollTrigger:{ trigger:el, start:"top 80%", toggleActions:"play none none none", once:true }
     });
   });
 </script>
 </body>
 </html>
-
