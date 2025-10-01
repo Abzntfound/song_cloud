@@ -1,187 +1,253 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<title>IBM Lyrical Song Cloud</title>
-<link rel="icon" type="image/jpeg" href="favicon.ico">
+  <meta charset="UTF-8">
+  <title>IBM Lyrical Song Cloud</title>
+  <link rel="icon" type="image/jpeg" href="favicon.ico">
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script><style type="text/css" id="operaUserStyle"></style>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 
-<!-- GSAP -->
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-body { font-family: Arial, sans-serif; margin:0; text-align:center; color:black;
-       background: linear-gradient(90deg, #6d3621, #2c1a12);
-       background-size:200% 200%; animation:bgMove 15s ease infinite; padding-top:5rem;}
-@keyframes bgMove {0% {background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
-h1{font-size:2rem;} p{font-size:large;} input, textarea{width:300px; padding:8px; margin:5px 0;}
-textarea{height:100px; width:80%;} ul{list-style:none;padding:0;} li{margin:5px 0;} a{text-decoration:none; color:black;}
-hr{border:0;height:2px;background:linear-gradient(to right,transparent 30%,black 50%,transparent 70%);margin:1rem 0;}
-footer{background-color:black;color:white;position:fixed;bottom:0;width:100%;padding:5px;}
-#header{position:fixed;top:0;left:0;width:100%;background:#6d3621;color:black;display:flex;justify-content:space-between;padding:10px 20px;z-index:1000;}
-.gradient-btn{border:2px solid white;background:linear-gradient(to right,#5C2B18 10%,#000 90%);color:white;padding:10px 18px;border-radius:8px;font-weight:bold;cursor:pointer;margin:3px;}
-.gradient-btn:hover{background:linear-gradient(to right,#000 10%,#5C2B18 90%); transform:translateY(-2px);}
-#loginForm,#registerForm,#developerPortal,#addSongsSection{display:none;margin-top:5rem;}
-#Entrance{margin-top:6rem;}
-#songList div{margin-bottom:1rem;}
-</style>
-</head>
+    <!-- Basic SEO -->
+  <meta name="description" content="IBM Lyrical Song Cloud – Explore and stream your favorite songs with lyrics online. Discover new music and enjoy lyrical experiences.">
+  <meta name="keywords" content="IBM Lyrical Song Cloud, music, lyrics, songs, streaming, online music, playlists">
+  <meta name="author" content="Your Name or Username">
+
+  <!-- Open Graph / Social sharing -->
+  <meta property="og:title" content="IBM Lyrical Song Cloud">
+  <meta property="og:description" content="IBM Lyrical Song Cloud – Explore and stream your favorite songs with lyrics online. Discover new music and enjoy lyrical experiences.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yourusername.github.io/ibmsound"> <!-- replace with your GitHub Pages URL -->
+  <meta property="og:image" content="cover-image.jpg"> <!-- replace with a cover image -->
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="IBM Lyrical Song Cloud">
+  <meta name="twitter:description" content="IBM Lyrical Song Cloud – Explore and stream your favorite songs with lyrics online. Discover new music and enjoy lyrical experiences.">
+  <meta name="twitter:image" content="cover-image.jpg"> <!-- replace with a cover image -->
+
+  <!-- Viewport for mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; text-align: center; background-color: white;}
+    h1 {font-size: 2rem;}
+    p {font-size: large;}
+    input { width: 300px; padding: 8px; margin: 5px 0;}
+    ul { list-style-type: none; padding: 0; }
+    li { margin: 5px 0; }
+    a { text-decoration: none; color: blue; }
+    a:hover { text-decoration: underline; }
+    hr {background-color: black; height: 0.5rem; box-shadow: 0 0 10px black}
+    footer {background-color: black; color: white; position: fixed; bottom: 0; left: 0; width: 100%; text-align: center; padding: 5px;}
+    #header {color: black; background-color: white; position: fixed; top: 0; left: 0; width: 100%; padding: 5px 15px; font-family: "Poppins", sans-serif; display: flex; gap: 70rem; align-items: center; border-bottom: 1px solid #ccc; border-bottom: 3px solid transparent; border-image: linear-gradient(to right, transparent,  #6d3621, #2c1a12, #6d3621, white) 1; background-color:  #6d3621;}
+    #Entrance {color: black; text-align: center; margin-top: 6rem;}
+    #song {border: 0.6rem black; padding: 10px;}
+    #loginForm, #registerForm, #developerPortal { display: none; margin-top: 7rem; }
+    #developerPortal textarea { width: 80%; height: 300px; }
+    #header .left { font-weight: bold; }
+
+hr {
+  border: 0;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent 30%,
+    black 50%,
+    transparent 70%
+  );
+  margin-top: 7rem;
+}
+
+.gradient-btn {
+  border: 2px solid white;
+  background: linear-gradient(to right,  #5C2B18 10%, #000000 90%);
+  color: white;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none; /* for links */
+  transition: all 0.3s ease;
+}
+
+.gradient-btn:hover {
+  background: linear-gradient(to right, #000000 10%, #5C2B18 90%);
+  transform: translateY(-2px);
+}
+
+    #header .right { font-size: 0.9rem; color: #555; }
+    a:link, a:visited, a:hover, a:active {color: black;}
+  </style>
+<style type="text/css"></style></head>
 <body>
 
-<!-- Header -->
-<div id="header" class="animate">
-  <h3><a href="#" class="gradient-btn" onclick="showHome()">IBM SONG CLOUD</a></h3>
-  <div>
-    <button class="gradient-btn" onclick="showLogin()">Log In</button>
-    <button class="gradient-btn" onclick="showAddSongs()">Add Songs</button>
-  </div>
+<!-- Login Form -->
+<div id="header" class="animate" style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px);"> 
+  <h3 class="left"><a href="index.html" class="gradient-btn">IBM SONG CLOUD</a></h3>
+  <h5 class="right"><a href="#log_in" onclick="showLogin()" class="gradient-btn">Log in</a></h5>
+  <h4 class="right"><a href="#mAdd more songs</a></h4>
 </div>
 
-<!-- Login Form -->
-<div id="loginForm" class="animate">
+<div id="loginForm" class="animate" style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px); display: none;">
   <h3>Login</h3>
   <input type="text" id="username" placeholder="Username"><br>
-  <input type="password" id="password" placeholder="Password"><br>
-  <button class="gradient-btn" onclick="login()">Log In</button><br>
-  <a href="#" onclick="showRegister()">Create new account</a>
+  <input type="password" id="password" placeholder="Password" aria-autocomplete="list"><br>
+  <button onclick="login()">Log In</button><br>
+  <p><a href="#" onclick="showRegister()">Create new account</a></p>
 </div>
 
 <!-- Registration Form -->
-<div id="registerForm" class="animate">
+<div id="registerForm" class="animate" style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px); display: none;">
   <h3>Create Account</h3>
   <input type="text" id="regUsername" placeholder="Username"><br>
   <input type="password" id="regPassword" placeholder="Password"><br>
-  <button class="gradient-btn" onclick="register()">Register</button><br>
-  <a href="#" onclick="showLogin()">Back to login</a>
+  <button onclick="register()">Register</button><br>
+  <p><a href="#" onclick="showLogin()">Back to login</a></p>
 </div>
 
-<!-- Main -->
-<div id="Entrance" class="animate">
+<!-- Main Content for Users -->
+<div id="Entrance" class="animate" style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px); display: none;">
   <h1>Welcome to IBM's Lyrical Song Cloud!</h1>
-  <p>Search for a song:</p>
-  <input type="text" id="searchBox" placeholder="Search..." onkeyup="searchSongs()">
+  <p>Begin by searching the song you want: </p>
+  <h2>Song Search</h2>
+  <input type="text" id="searchBox" placeholder="Type to search..." onkeyup="searchSites()">
   <ul id="results"></ul>
 </div>
 
-<!-- Add Songs Section -->
-<div id="addSongsSection" class="animate">
-  <h3>Add New Song</h3>
-  <input type="text" id="songTitle" placeholder="Song Title"><br>
-  <textarea id="songLyrics" placeholder="Enter lyrics..."></textarea><br>
-  <input type="text" id="songLink" placeholder="Optional URL"><br>
-  <button class="gradient-btn" onclick="addSong()">Add Song</button>
-  <button class="gradient-btn" onclick="saveSongTemplate()">Save Song</button>
-  <h4>Song List</h4>
-  <div id="songList"></div>
+<!-- Song Links -->
+<div id="song" style="display: none;">
+  <script>
+    const sites = [
+      { name: "Finally Song", url: "Finally.html", target: "_blank"},
+      { name: "Fire", url: "fire.html", target: "_blank"},
+      { name: "It is raining", url: "it_is_raining.html", target: "_blank"},
+      { name: "", url: "products.html", target: "_blank"},
+      { name: "", url: "profile.html", target: "_blank"}
+    ];
+
+    function searchSites() {
+      const input = document.getElementById("searchBox").value.toLowerCase();
+      const results = document.getElementById("results");
+      results.innerHTML = ""; 
+      if (input.length === 0) return; 
+      const matches = sites.filter(site => site.name.toLowerCase().startsWith(input));
+      matches.forEach(site => {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.href = site.url;
+        a.textContent = site.name;
+        if (site.target) a.target = site.target;
+        li.appendChild(a);
+        results.appendChild(li);
+      });
+    }
+  </script>
 </div>
 
 <!-- Developer Portal -->
-<div id="developerPortal" class="animate">
+<div id="developerPortal" style="display: block;">
   <h3>Developer Portal</h3>
+  <p>Edit the page code below and save changes:</p>
   <textarea id="codeEditor"></textarea><br>
-  <button class="gradient-btn" onclick="saveCode()">Preview Code</button>
+  <button onclick="saveCode()">Save Changes</button>
 </div>
 
-<footer>© IBM Church Rights Reserved</footer>
+<footer>©IBM Church Rights Reserved</footer>
 
 <script>
-// Users
-let users = JSON.parse(localStorage.getItem('users')) || [
-  {username:"user1", password:"1234", role:"user"},
-  {username:"dev", password:"devpass", role:"developer"}
-];
+  // Users storage with localStorage
+  let users = JSON.parse(localStorage.getItem('users')) || [
+    { username: "user1", password: "1234", role: "user" },
+    { username: "dev", password: "devpass", role: "developer" }
+  ];
 
-// Songs
-let songs = JSON.parse(localStorage.getItem('songs')) || [
-  {name:"Finally Song", url:"Finally.html", target:"_blank"},
-  {name:"Fire", url:"fire.html", target:"_blank"}
-];
+  function showLogin() {
+    document.getElementById('loginForm').style.display = 'block';
+    document.getElementById('registerForm').style.display = 'none';
+  }
 
-// Show sections
-function hideAll(){['loginForm','registerForm','Entrance','addSongsSection','developerPortal'].forEach(id=>document.getElementById(id).style.display='none');}
-function showLogin(){hideAll(); document.getElementById('loginForm').style.display='block';}
-function showRegister(){hideAll(); document.getElementById('registerForm').style.display='block';}
-function showHome(){hideAll(); document.getElementById('Entrance').style.display='block'; renderSongs();}
-function showAddSongs(){hideAll(); document.getElementById('addSongsSection').style.display='block'; renderSongs();}
+  function showRegister() {
+    document.getElementById('registerForm').style.display = 'block';
+    document.getElementById('loginForm').style.display = 'none';
+  }
 
-// Login/Register
-function login(){
-  const u=document.getElementById('username').value;
-  const p=document.getElementById('password').value;
-  const user=users.find(x=>x.username===u && x.password===p);
-  if(!user){alert('Invalid credentials'); return;}
-  hideAll();
-  if(user.role==='developer'){document.getElementById('developerPortal').style.display='block'; document.getElementById('addSongsSection').style.display='block'; renderSongs(); document.getElementById('codeEditor').value=document.documentElement.innerHTML;}
-  else {alert('Logged in as normal user!'); document.getElementById('Entrance').style.display='block';}
-}
+  function login() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const user = users.find(u => u.username === username && u.password === password);
 
-function register(){
-  const u=document.getElementById('regUsername').value;
-  const p=document.getElementById('regPassword').value;
-  if(!u||!p){alert('Fill all fields'); return;}
-  if(users.find(x=>x.username===u)){alert('Username exists'); return;}
-  users.push({username:u,password:p,role:"user"});
-  localStorage.setItem('users',JSON.stringify(users));
-  alert('Account created!'); showLogin();
-}
+    if (!user) {
+      alert('Invalid username or password');
+      return;
+    }
 
-// Add Song
-function addSong(){
-  const t=document.getElementById('songTitle').value.trim();
-  const l=document.getElementById('songLyrics').value.trim();
-  const link=document.getElementById('songLink').value.trim();
-  if(!t||!l){alert('Fill title & lyrics'); return;}
-  const fileName=t.replace(/\s+/g,'_')+'.html';
-  const html=`<html><head><title>${t}</title></head><body><h1>${t}</h1><p>${l}</p>${link?`<a href="${link}" target="_blank">Listen</a>`:''}</body></html>`;
-  songs.push({name:t,url:fileName,target:'_blank'});
-  localStorage.setItem('songs',JSON.stringify(songs));
-  let db=JSON.parse(localStorage.getItem('songFiles')||'{}'); db[fileName]=html; localStorage.setItem('songFiles',JSON.stringify(db));
-  renderSongs(); alert(`Song "${t}" added!`);
-}
+    document.getElementById('loginForm').style.display = 'none';
 
-// Render songs
-function renderSongs(){
-  const list=document.getElementById('songList'); list.innerHTML='';
-  if(songs.length===0){list.innerHTML='<p>No songs yet.</p>'; return;}
-  songs.forEach(s=>{const d=document.createElement('div'); d.innerHTML=`<h3>${s.name}</h3><a href="${s.url}" target="_blank">Open Song</a><hr>`; list.appendChild(d);});
-}
+    if (user.role === 'developer') {
+      document.getElementById('Entrance').style.display = 'none';
+      document.getElementById('song').style.display = 'none';
+      document.getElementById('developerPortal').style.display = 'block';
+      document.getElementById('codeEditor').value = document.documentElement.innerHTML;
+    } else {
+      alert('Logged in as normal user!');
+    }
+  }
 
-// Save song template
-function saveSongTemplate(){
-  const t=document.getElementById('songTitle').value.trim();
-  if(!t){alert('Add a song first!'); return;}
-  let fileName=prompt('File name (without extension):', t.replace(/\s+/g,'_'));
-  if(!fileName) return alert('Save cancelled');
-  if(!fileName.endsWith('.html')) fileName+='.html';
-  const l=document.getElementById('songLyrics').value.trim();
-  const link=document.getElementById('songLink').value.trim();
-  const html=`<html><head><title>${t}</title></head><body><h1>${t}</h1><p>${l}</p>${link?`<a href="${link}" target="_blank">Listen</a>`:''}</body></html>`;
-  let db=JSON.parse(localStorage.getItem('songFiles')||'{}'); db[fileName]=html; localStorage.setItem('songFiles',JSON.stringify(db));
-  alert(`Song saved as "${fileName}"!`);
-}
+  function register() {
+    const username = document.getElementById('regUsername').value;
+    const password = document.getElementById('regPassword').value;
 
-// Developer preview
-function saveCode(){const code=document.getElementById('codeEditor').value; const w=window.open(); w.document.write(code); w.document.close(); alert('Preview opened!');}
+    if (!username || !password) {
+      alert("Please fill in all fields");
+      return;
+    }
 
-// Search
-function searchSongs(){
-  const q=document.getElementById('searchBox').value.toLowerCase();
-  const res=document.getElementById('results'); res.innerHTML='';
-  if(!q) return;
-  songs.filter(s=>s.name.toLowerCase().startsWith(q)).forEach(s=>{
-    const li=document.createElement('li');
-    const a=document.createElement('a'); a.href=s.url; a.textContent=s.name; if(s.target) a.target=s.target;
-    li.appendChild(a); res.appendChild(li);
+    if (users.find(u => u.username === username)) {
+      alert("Username already exists");
+      return;
+    }
+
+    const newUser = { username: username, password: password, role: "user" };
+    users.push(newUser);
+    localStorage.setItem('users', JSON.stringify(users));
+
+    alert("Account created! You can now log in.");
+    document.getElementById('registerForm').style.display = 'none';
+    document.getElementById('loginForm').style.display = 'block';
+  }
+
+  function saveCode() {
+    const code = document.getElementById('codeEditor').value;
+    const newWindow = window.open();
+    newWindow.document.open();
+    newWindow.document.write(code);
+    newWindow.document.close();
+    alert('Code preview opened in new window!');
+  }
+
+  gsap.registerPlugin(ScrollTrigger);
+
+gsap.utils.toArray(".animate").forEach(el => {
+  gsap.from(el, {
+    y: 100,
+    opacity: 0,
+    duration: 1,
+    ease: "power3.out",
+    scrollTrigger: {
+      trigger: el,
+      start: "top 80%",
+      toggleActions: "play none none none",
+      once: true
+    }
   });
-}
-
-// GSAP Animations
-gsap.registerPlugin(ScrollTrigger);
-gsap.utils.toArray(".animate").forEach(el=>{gsap.from(el,{y:100,opacity:0,duration:1,ease:"power3.out", scrollTrigger:{trigger:el,start:"top 80%",once:true}});});
-
-// Initial render
-renderSongs();
+});
 </script>
 </body>
 </html>
+
+
+
+
+
+
