@@ -207,7 +207,7 @@ hr {
   }
 
   // Decrypt animation for ANY element
-function decryptText(element, speed = 30) {
+function decryptText(element, speed = 20) {
   const originalText = element.innerText;
   const chars = "!@#$%^&*()_+=-{}[]<>?/0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   let output = originalText.split("").map(() => ""); 
@@ -232,7 +232,7 @@ function decryptText(element, speed = 30) {
 // Run on ALL text elements in body
 window.onload = () => {
   // Select all headings, paragraphs, buttons, links, list items, labels, etc.
-  const textElements = document.querySelectorAll("h1, h2, h3, h4, h5, h6, p, a, li, button, label, span");
+  const textElements = document.querySelectorAll("p, a, li, button, label, span");
 
   textElements.forEach((el, index) => {
     setTimeout(() => {
@@ -260,3 +260,4 @@ gsap.utils.toArray(".animate").forEach(el => {
 </script>
 </body>
 </html>
+
