@@ -30,8 +30,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body { font-family: Arial, sans-serif; margin: 20px; text-align: center; background-color: white;}
-    h1 {font-size: 2rem;}
-    p {font-size: large;}
+    h1 {font-size: 3rem;}
+    p {font-size: larger;}
     input { width: 300px; padding: 8px; margin: 5px 0;}
     ul { list-style-type: none; padding: 0; }
     li { margin: 5px 0; }
@@ -206,6 +206,41 @@ hr {
     alert('Code preview opened in new window!');
   }
 
+  // Decrypt animation for ANY element
+function decryptText(element, speed = 30) {
+  const originalText = element.innerText;
+  const chars = "!@#$%^&*()_+=-{}[]<>?/0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  let output = originalText.split("").map(() => ""); 
+
+  let i = 0;
+  const interval = setInterval(() => {
+    output = output.map((char, index) => {
+      if (index < i) {
+        return originalText[index]; // lock correct character
+      }
+      return chars[Math.floor(Math.random() * chars.length)];
+    });
+    element.innerText = output.join("");
+    if (i >= originalText.length) {
+      clearInterval(interval);
+      element.innerText = originalText; // restore final text
+    }
+    i++;
+  }, speed);
+}
+
+// Run on ALL text elements in body
+window.onload = () => {
+  // Select all headings, paragraphs, buttons, links, list items, labels, etc.
+  const textElements = document.querySelectorAll("h1, h2, h3, h4, h5, h6, p, a, li, button, label, span");
+
+  textElements.forEach((el, index) => {
+    setTimeout(() => {
+      decryptText(el, 40); // apply staggered decrypt
+    }, index * 300); // delay each element for nice flow
+  });
+};
+
   gsap.registerPlugin(ScrollTrigger);
 
 gsap.utils.toArray(".animate").forEach(el => {
@@ -225,10 +260,3 @@ gsap.utils.toArray(".animate").forEach(el => {
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
