@@ -57,25 +57,6 @@ hr {
   );
   margin-top: 7rem;
 }
-
-.gradient-btn {
-  border: 2px solid white;
-  background: linear-gradient(to right,  #5C2B18 10%, #000000 90%);
-  color: white;
-  padding: 10px 18px;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  text-decoration: none; /* for links */
-  transition: all 0.3s ease;
-}
-
-.gradient-btn:hover {
-  background: linear-gradient(to right, #000000 10%, #5C2B18 90%);
-  transform: translateY(-2px);
-}
-
     #header .right { font-size: 0.9rem; color: #555; }
     a:link, a:visited, a:hover, a:active {color: black;}
   </style>
@@ -83,13 +64,12 @@ hr {
 <body>
 
 <!-- Login Form -->
-<div id="header" class="animate" style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px);"> 
-  <h3 class="left"><a href="index.html" class="gradient-btn">IBM SONG CLOUD</a></h3>
-  <h5 class="right"><a href="#log_in" onclick="showLogin()" class="gradient-btn">Log in</a></h5>
-  <h4 class="right"><a href="#mAdd more songs</a></h4>
+<div id="header" class="animate"> 
+  <h3 class="left"><a href="index.html">IBM SONG CLOUD</a></h3>
+  <h5 class="right"><a href="#log_in" onclick="showLogin()">Log in</a></h5>
 </div>
 
-<div id="loginForm" class="animate" style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px); display: none;">
+<div id="loginForm" class="animate">
   <h3>Login</h3>
   <input type="text" id="username" placeholder="Username"><br>
   <input type="password" id="password" placeholder="Password" aria-autocomplete="list"><br>
@@ -98,7 +78,7 @@ hr {
 </div>
 
 <!-- Registration Form -->
-<div id="registerForm" class="animate" style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px); display: none;">
+<div id="registerForm" class="animate">
   <h3>Create Account</h3>
   <input type="text" id="regUsername" placeholder="Username"><br>
   <input type="password" id="regPassword" placeholder="Password"><br>
@@ -107,7 +87,7 @@ hr {
 </div>
 
 <!-- Main Content for Users -->
-<div id="Entrance" class="animate" style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px); display: none;">
+<div id="Entrance" class="animate">
   <h1>Welcome to IBM's Lyrical Song Cloud!</h1>
   <p>Begin by searching the song you want: </p>
   <h2>Song Search</h2>
@@ -116,7 +96,7 @@ hr {
 </div>
 
 <!-- Song Links -->
-<div id="song" style="display: none;">
+<div id="song">
   <script>
     const sites = [
       { name: "Finally Song", url: "Finally.html", target: "_blank"},
@@ -146,7 +126,7 @@ hr {
 </div>
 
 <!-- Developer Portal -->
-<div id="developerPortal" style="display: block;">
+<div id="developerPortal">
   <h3>Developer Portal</h3>
   <p>Edit the page code below and save changes:</p>
   <textarea id="codeEditor"></textarea><br>
@@ -245,6 +225,7 @@ gsap.utils.toArray(".animate").forEach(el => {
 </script>
 </body>
 </html>
+
 
 
 
