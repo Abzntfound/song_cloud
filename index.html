@@ -9,50 +9,32 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 
-<!-- SEO & Social -->
-<meta name="description" content="IBM Lyrical Song Cloud – Explore and stream your favorite songs with lyrics online.">
-<meta name="keywords" content="IBM Lyrical Song Cloud, music, lyrics, songs, streaming, online music, playlists">
-<meta name="author" content="Your Name or Username">
-<meta property="og:title" content="IBM Lyrical Song Cloud">
-<meta property="og:description" content="Explore and stream your favorite songs with lyrics online.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://yourusername.github.io/ibmsound">
-<meta property="og:image" content="cover-image.jpg">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="IBM Lyrical Song Cloud">
-<meta name="twitter:description" content="Explore and stream your favorite songs with lyrics online.">
-<meta name="twitter:image" content="cover-image.jpg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <style>
-body { font-family: Arial, sans-serif; margin: 0; text-align: center; color: black;
+body { font-family: Arial, sans-serif; margin:0; text-align:center; color:black;
        background: linear-gradient(90deg, #6d3621, #2c1a12);
-       background-size: 200% 200%; animation: bgMove 15s ease infinite; padding-top: 5rem;}
-@keyframes bgMove {0% {background-position:0% 50%;} 50% {background-position:100% 50%;} 100% {background-position:0% 50%;}}
-h1 {font-size:2rem;} p {font-size:large;} input {width:300px; padding:8px; margin:5px 0;}
-ul {list-style-type:none; padding:0;} li {margin:5px 0;} a {text-decoration:none; color:black;}
-hr {border:0; height:2px; background:linear-gradient(to right, transparent 30%, black 50%, transparent 70%); margin:3rem 0;}
-footer {background-color:black; color:white; position:fixed; bottom:0; left:0; width:100%; text-align:center; padding:5px;}
-#header {color:black; background-color:#6d3621; position:fixed; top:0; left:0; width:100%; padding:10px 20px;
-         display:flex; justify-content:space-between; align-items:center; border-bottom:3px solid transparent;
-         border-image:linear-gradient(to right, transparent, #6d3621, #2c1a12, #6d3621, white) 1; z-index:1000;}
-#Entrance {margin-top:6rem; color:black; text-align:center;} #song {padding:10px;}
-#loginForm, #registerForm, #developerPortal, #addSongsSection {display:none; margin-top:7rem;}
-#developerPortal textarea, #addSongsSection textarea {width:80%; height:300px;}
-.gradient-btn {border:2px solid white; background:linear-gradient(to right, #5C2B18 10%, #000000 90%);
-              color:white; padding:10px 18px; border-radius:8px; font-size:1rem; font-weight:bold;
-              cursor:pointer; text-decoration:none; transition:all 0.3s ease; margin:3px;}
-.gradient-btn:hover {background:linear-gradient(to right, #000000 10%, #5C2B18 90%); transform:translateY(-2px);}
+       background-size:200% 200%; animation:bgMove 15s ease infinite; padding-top:5rem;}
+@keyframes bgMove {0% {background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+h1{font-size:2rem;} p{font-size:large;} input, textarea{width:300px; padding:8px; margin:5px 0;}
+textarea{height:100px; width:80%;} ul{list-style:none;padding:0;} li{margin:5px 0;} a{text-decoration:none; color:black;}
+hr{border:0;height:2px;background:linear-gradient(to right,transparent 30%,black 50%,transparent 70%);margin:1rem 0;}
+footer{background-color:black;color:white;position:fixed;bottom:0;width:100%;padding:5px;}
+#header{position:fixed;top:0;left:0;width:100%;background:#6d3621;color:black;display:flex;justify-content:space-between;padding:10px 20px;z-index:1000;}
+.gradient-btn{border:2px solid white;background:linear-gradient(to right,#5C2B18 10%,#000 90%);color:white;padding:10px 18px;border-radius:8px;font-weight:bold;cursor:pointer;margin:3px;}
+.gradient-btn:hover{background:linear-gradient(to right,#000 10%,#5C2B18 90%); transform:translateY(-2px);}
+#loginForm,#registerForm,#developerPortal,#addSongsSection{display:none;margin-top:5rem;}
+#Entrance{margin-top:6rem;}
+#songList div{margin-bottom:1rem;}
 </style>
 </head>
 <body>
 
 <!-- Header -->
 <div id="header" class="animate">
-  <h3 class="left"><a href="index.html" class="gradient-btn">IBM SONG CLOUD</a></h3>
+  <h3><a href="#" class="gradient-btn" onclick="showHome()">IBM SONG CLOUD</a></h3>
   <div>
-    <a href="#log_in" onclick="showLogin()" class="gradient-btn">Log in</a>
-    <a href="#addSongs" class="gradient-btn" onclick="showAddSongs()">Add More Songs</a>
+    <button class="gradient-btn" onclick="showLogin()">Log In</button>
+    <button class="gradient-btn" onclick="showAddSongs()">Add Songs</button>
   </div>
 </div>
 
@@ -61,8 +43,8 @@ footer {background-color:black; color:white; position:fixed; bottom:0; left:0; w
   <h3>Login</h3>
   <input type="text" id="username" placeholder="Username"><br>
   <input type="password" id="password" placeholder="Password"><br>
-  <button onclick="login()">Log In</button><br>
-  <p><a href="#" onclick="showRegister()">Create new account</a></p>
+  <button class="gradient-btn" onclick="login()">Log In</button><br>
+  <a href="#" onclick="showRegister()">Create new account</a>
 </div>
 
 <!-- Registration Form -->
@@ -70,170 +52,136 @@ footer {background-color:black; color:white; position:fixed; bottom:0; left:0; w
   <h3>Create Account</h3>
   <input type="text" id="regUsername" placeholder="Username"><br>
   <input type="password" id="regPassword" placeholder="Password"><br>
-  <button onclick="register()">Register</button><br>
-  <p><a href="#" onclick="showLogin()">Back to login</a></p>
+  <button class="gradient-btn" onclick="register()">Register</button><br>
+  <a href="#" onclick="showLogin()">Back to login</a>
 </div>
 
-<!-- Main Content -->
+<!-- Main -->
 <div id="Entrance" class="animate">
   <h1>Welcome to IBM's Lyrical Song Cloud!</h1>
-  <p>Begin by searching the song you want:</p>
-  <h2>Song Search</h2>
-  <input type="text" id="searchBox" placeholder="Type to search..." onkeyup="searchSites()">
+  <p>Search for a song:</p>
+  <input type="text" id="searchBox" placeholder="Search..." onkeyup="searchSongs()">
   <ul id="results"></ul>
-</div>
-
-<!-- Song Links -->
-<div id="song"></div>
-
-<!-- Developer Portal -->
-<div id="developerPortal" class="animate">
-  <h3>Developer Portal</h3>
-  <p>Edit the page code below and save changes:</p>
-  <textarea id="codeEditor"></textarea><br>
-  <button class="gradient-btn" onclick="saveCode()">Preview Changes</button>
 </div>
 
 <!-- Add Songs Section -->
 <div id="addSongsSection" class="animate">
-  <h3>Add New Songs</h3>
+  <h3>Add New Song</h3>
   <input type="text" id="songTitle" placeholder="Song Title"><br>
-  <textarea id="songLyrics" placeholder="Enter lyrics here..."></textarea><br>
-  <input type="text" id="songLink" placeholder="Optional: Song URL"><br>
+  <textarea id="songLyrics" placeholder="Enter lyrics..."></textarea><br>
+  <input type="text" id="songLink" placeholder="Optional URL"><br>
   <button class="gradient-btn" onclick="addSong()">Add Song</button>
-  <button class="gradient-btn" onclick="saveSongTemplate()">Save Songs</button>
+  <button class="gradient-btn" onclick="saveSongTemplate()">Save Song</button>
+  <h4>Song List</h4>
   <div id="songList"></div>
+</div>
+
+<!-- Developer Portal -->
+<div id="developerPortal" class="animate">
+  <h3>Developer Portal</h3>
+  <textarea id="codeEditor"></textarea><br>
+  <button class="gradient-btn" onclick="saveCode()">Preview Code</button>
 </div>
 
 <footer>© IBM Church Rights Reserved</footer>
 
 <script>
-/* Users */
-let users = JSON.parse(localStorage.getItem('users'))||[
-  {username:"user1",password:"1234",role:"user"},
-  {username:"dev",password:"devpass",role:"developer"}
+// Users
+let users = JSON.parse(localStorage.getItem('users')) || [
+  {username:"user1", password:"1234", role:"user"},
+  {username:"dev", password:"devpass", role:"developer"}
 ];
 
-/* Songs storage */
-let sites = JSON.parse(localStorage.getItem('songs'))||[
-  {name:"Finally Song",url:"Finally.html",target:"_blank"},
-  {name:"Fire",url:"fire.html",target:"_blank"},
-  {name:"It is raining",url:"it_is_raining.html",target:"_blank"},
-  {name:"Products",url:"products.html",target:"_blank"},
-  {name:"Profile",url:"profile.html",target:"_blank"}
+// Songs
+let songs = JSON.parse(localStorage.getItem('songs')) || [
+  {name:"Finally Song", url:"Finally.html", target:"_blank"},
+  {name:"Fire", url:"fire.html", target:"_blank"}
 ];
-function searchSites(){
-  const input=document.getElementById('searchBox').value.toLowerCase();
-  const results=document.getElementById('results');
-  results.innerHTML='';
-  if(!input) return;
-  sites.filter(s=>s.name.toLowerCase().startsWith(input))
-       .forEach(site=>{
-         const li=document.createElement('li');
-         const a=document.createElement('a');
-         a.href=site.url; a.textContent=site.name; if(site.target) a.target=site.target;
-         li.appendChild(a); results.appendChild(li);
-       });
-}
 
-/* Login/Register */
-function showLogin(){ document.getElementById('loginForm').style.display='block'; document.getElementById('registerForm').style.display='none'; }
-function showRegister(){ document.getElementById('registerForm').style.display='block'; document.getElementById('loginForm').style.display='none'; }
+// Show sections
+function hideAll(){['loginForm','registerForm','Entrance','addSongsSection','developerPortal'].forEach(id=>document.getElementById(id).style.display='none');}
+function showLogin(){hideAll(); document.getElementById('loginForm').style.display='block';}
+function showRegister(){hideAll(); document.getElementById('registerForm').style.display='block';}
+function showHome(){hideAll(); document.getElementById('Entrance').style.display='block'; renderSongs();}
+function showAddSongs(){hideAll(); document.getElementById('addSongsSection').style.display='block'; renderSongs();}
+
+// Login/Register
 function login(){
-  const username=document.getElementById('username').value;
-  const password=document.getElementById('password').value;
-  const user=users.find(u=>u.username===username && u.password===password);
-  if(!user){alert('Invalid username or password'); return;}
-  document.getElementById('loginForm').style.display='none';
-  if(user.role==='developer'){
-    document.getElementById('Entrance').style.display='none';
-    document.getElementById('song').style.display='none';
-    document.getElementById('developerPortal').style.display='block';
-    document.getElementById('codeEditor').value=document.documentElement.innerHTML;
-    document.getElementById('addSongsSection').style.display='block';
-  } else {
-    alert('Logged in as normal user!');
-    document.getElementById('Entrance').style.display='block';
-    document.getElementById('song').style.display='block';
-  }
+  const u=document.getElementById('username').value;
+  const p=document.getElementById('password').value;
+  const user=users.find(x=>x.username===u && x.password===p);
+  if(!user){alert('Invalid credentials'); return;}
+  hideAll();
+  if(user.role==='developer'){document.getElementById('developerPortal').style.display='block'; document.getElementById('addSongsSection').style.display='block'; renderSongs(); document.getElementById('codeEditor').value=document.documentElement.innerHTML;}
+  else {alert('Logged in as normal user!'); document.getElementById('Entrance').style.display='block';}
 }
+
 function register(){
-  const username=document.getElementById('regUsername').value;
-  const password=document.getElementById('regPassword').value;
-  if(!username||!password){alert("Please fill in all fields"); return;}
-  if(users.find(u=>u.username===username)){alert("Username already exists"); return;}
-  users.push({username,password,role:"user"});
+  const u=document.getElementById('regUsername').value;
+  const p=document.getElementById('regPassword').value;
+  if(!u||!p){alert('Fill all fields'); return;}
+  if(users.find(x=>x.username===u)){alert('Username exists'); return;}
+  users.push({username:u,password:p,role:"user"});
   localStorage.setItem('users',JSON.stringify(users));
-  alert("Account created! You can now log in.");
-  showLogin();
+  alert('Account created!'); showLogin();
 }
 
-/* Developer Portal */
-function saveCode(){
-  const code=document.getElementById('codeEditor').value;
-  const win=window.open();
-  win.document.open();
-  win.document.write(code);
-  win.document.close();
-  alert('Code preview opened in new window!');
-}
-
-/* Add Songs */
-function showAddSongs(){
-  document.getElementById('addSongsSection').style.display='block';
-  document.getElementById('Entrance').style.display='none';
-  document.getElementById('song').style.display='none';
-}
-
-let songs = JSON.parse(localStorage.getItem('songs'))||[];
+// Add Song
 function addSong(){
-  const title=document.getElementById('songTitle').value.trim();
-  const lyrics=document.getElementById('songLyrics').value.trim();
+  const t=document.getElementById('songTitle').value.trim();
+  const l=document.getElementById('songLyrics').value.trim();
   const link=document.getElementById('songLink').value.trim();
-  if(!title||!lyrics){alert('Fill title & lyrics'); return;}
-  const fileName = title.replace(/\s+/g,'_')+'.html';
-  const htmlContent = `<html><head><title>${title}</title></head>
-<body><h1>${title}</h1><p>${lyrics}</p>${link?`<a href="${link}" target="_blank">Listen</a>`:''}</body></html>`;
-  songs.push({name:title,url:fileName,target:'_blank'});
-  sites.push({name:title,url:fileName,target:'_blank'});
+  if(!t||!l){alert('Fill title & lyrics'); return;}
+  const fileName=t.replace(/\s+/g,'_')+'.html';
+  const html=`<html><head><title>${t}</title></head><body><h1>${t}</h1><p>${l}</p>${link?`<a href="${link}" target="_blank">Listen</a>`:''}</body></html>`;
+  songs.push({name:t,url:fileName,target:'_blank'});
   localStorage.setItem('songs',JSON.stringify(songs));
-  localStorage.setItem('songFiles',JSON.stringify({...JSON.parse(localStorage.getItem('songFiles')||{}),[fileName]:htmlContent}));
-  renderSongs();
-  alert(`Song "${title}" added!`);
+  let db=JSON.parse(localStorage.getItem('songFiles')||'{}'); db[fileName]=html; localStorage.setItem('songFiles',JSON.stringify(db));
+  renderSongs(); alert(`Song "${t}" added!`);
 }
+
+// Render songs
 function renderSongs(){
   const list=document.getElementById('songList'); list.innerHTML='';
-  songs.forEach(s=>{
-    const div=document.createElement('div');
-    div.innerHTML=`<h3>${s.name}</h3><hr>`;
-    list.appendChild(div);
+  if(songs.length===0){list.innerHTML='<p>No songs yet.</p>'; return;}
+  songs.forEach(s=>{const d=document.createElement('div'); d.innerHTML=`<h3>${s.name}</h3><a href="${s.url}" target="_blank">Open Song</a><hr>`; list.appendChild(d);});
+}
+
+// Save song template
+function saveSongTemplate(){
+  const t=document.getElementById('songTitle').value.trim();
+  if(!t){alert('Add a song first!'); return;}
+  let fileName=prompt('File name (without extension):', t.replace(/\s+/g,'_'));
+  if(!fileName) return alert('Save cancelled');
+  if(!fileName.endsWith('.html')) fileName+='.html';
+  const l=document.getElementById('songLyrics').value.trim();
+  const link=document.getElementById('songLink').value.trim();
+  const html=`<html><head><title>${t}</title></head><body><h1>${t}</h1><p>${l}</p>${link?`<a href="${link}" target="_blank">Listen</a>`:''}</body></html>`;
+  let db=JSON.parse(localStorage.getItem('songFiles')||'{}'); db[fileName]=html; localStorage.setItem('songFiles',JSON.stringify(db));
+  alert(`Song saved as "${fileName}"!`);
+}
+
+// Developer preview
+function saveCode(){const code=document.getElementById('codeEditor').value; const w=window.open(); w.document.write(code); w.document.close(); alert('Preview opened!');}
+
+// Search
+function searchSongs(){
+  const q=document.getElementById('searchBox').value.toLowerCase();
+  const res=document.getElementById('results'); res.innerHTML='';
+  if(!q) return;
+  songs.filter(s=>s.name.toLowerCase().startsWith(q)).forEach(s=>{
+    const li=document.createElement('li');
+    const a=document.createElement('a'); a.href=s.url; a.textContent=s.name; if(s.target) a.target=s.target;
+    li.appendChild(a); res.appendChild(li);
   });
 }
-renderSongs();
 
-/* Save Song Template */
-function saveSongTemplate(){
-  const title=document.getElementById('songTitle').value.trim();
-  if(!title) return alert('Add a song first!');
-  const fileName = prompt("Name this file (without extension):", title.replace(/\s+/g,'_'));
-  if(!fileName) return alert("Save cancelled!");
-  const name=fileName.endsWith('.html')?fileName:fileName+'.html';
-  const lyrics=document.getElementById('songLyrics').value.trim();
-  const link=document.getElementById('songLink').value.trim();
-  const htmlContent = `<html><head><title>${title}</title></head>
-<body><h1>${title}</h1><p>${lyrics}</p>${link?`<a href="${link}" target="_blank">Listen</a>`:''}</body></html>`;
-  let db = JSON.parse(localStorage.getItem('songFiles'))||{};
-  db[name]=htmlContent;
-  localStorage.setItem('songFiles',JSON.stringify(db));
-  alert(`Songs saved as "${name}"!`);
-}
-
-/* GSAP Animations */
+// GSAP Animations
 gsap.registerPlugin(ScrollTrigger);
-gsap.utils.toArray(".animate").forEach(el=>{
-  gsap.from(el,{y:100,opacity:0,duration:1,ease:"power3.out",
-    scrollTrigger:{trigger:el,start:"top 80%",toggleActions:"play none none none",once:true}});
-});
+gsap.utils.toArray(".animate").forEach(el=>{gsap.from(el,{y:100,opacity:0,duration:1,ease:"power3.out", scrollTrigger:{trigger:el,start:"top 80%",once:true}});});
+
+// Initial render
+renderSongs();
 </script>
 </body>
 </html>
