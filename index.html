@@ -1,59 +1,140 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>IBM Lyrical Song Cloud</title>
   <link rel="icon" type="image/jpeg" href="favicon.ico">
+
+  <!-- GSAP -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 
-
-    <!-- Basic SEO -->
+  <!-- SEO -->
   <meta name="description" content="IBM Lyrical Song Cloud – Explore and stream your favorite songs with lyrics online. Discover new music and enjoy lyrical experiences.">
   <meta name="keywords" content="IBM Lyrical Song Cloud, music, lyrics, songs, streaming, online music, playlists">
   <meta name="author" content="Your Name or Username">
 
-  <!-- Open Graph / Social sharing -->
+  <!-- Social Sharing -->
   <meta property="og:title" content="IBM Lyrical Song Cloud">
-  <meta property="og:description" content="IBM Lyrical Song Cloud – Explore and stream your favorite songs with lyrics online. Discover new music and enjoy lyrical experiences.">
+  <meta property="og:description" content="IBM Lyrical Song Cloud – Explore and stream your favorite songs with lyrics online.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://yourusername.github.io/ibmsound"> <!-- replace with your GitHub Pages URL -->
-  <meta property="og:image" content="cover-image.jpg"> <!-- replace with a cover image -->
+  <meta property="og:url" content="https://yourusername.github.io/ibmsound">
+  <meta property="og:image" content="cover-image.jpg">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="IBM Lyrical Song Cloud">
-  <meta name="twitter:description" content="IBM Lyrical Song Cloud – Explore and stream your favorite songs with lyrics online. Discover new music and enjoy lyrical experiences.">
-  <meta name="twitter:image" content="cover-image.jpg"> <!-- replace with a cover image -->
+  <meta name="twitter:description" content="Explore and stream your favorite songs with lyrics online.">
+  <meta name="twitter:image" content="cover-image.jpg">
 
-  <!-- Viewport for mobile devices -->
+  <!-- Mobile -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Styles -->
   <style>
-    body { font-family: Arial, sans-serif; margin: 20px; text-align: center;}
-    h1 {font-size: 2rem;}
-    p {font-size: large;}
-    input { width: 300px; padding: 8px; margin: 5px 0;}
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      text-align: center;
+      color: black;
+      background: linear-gradient(90deg, #6d3621, #2c1a12);
+      background-size: 200% 200%;
+      animation: bgMove 15s ease infinite;
+      padding-top: 5rem;
+    }
+
+    @keyframes bgMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h1 { font-size: 2rem; }
+    p { font-size: large; }
+    input { width: 300px; padding: 8px; margin: 5px 0; }
     ul { list-style-type: none; padding: 0; }
     li { margin: 5px 0; }
-    a { text-decoration: none; color: blue; }
-    a:hover { text-decoration: underline; }
-    hr {background-color: black; height: 0.5rem; box-shadow: 0 0 10px black}
-    footer {background-color: black; color: white; position: fixed; bottom: 0; left: 0; width: 100%; text-align: center; padding: 5px;}
-    #header {color: black; background-color: white; position: fixed; top: 0; left: 0; width: 100%; padding: 5px 15px; font-family: "Poppins", sans-serif; display: flex; gap: 70rem; align-items: center; border-bottom: 1px solid #ccc;}
-    #Entrance {color: black; text-align: center; margin-top: 6rem;}
-    #song {border: 0.6rem black; padding: 10px;}
-    #loginForm, #registerForm, #developerPortal { display: none; margin-top: 7rem; }
-    #developerPortal textarea { width: 80%; height: 300px; }
-    #header .left { font-weight: bold; }
-    #header .right { font-size: 0.9rem; color: #555; }
-    a:link, a:visited, a:hover, a:active {color: black;}
+    a { text-decoration: none; color: black; }
+
+    hr {
+      border: 0;
+      height: 2px;
+      background: linear-gradient(to right, transparent 30%, black 50%, transparent 70%);
+      margin: 3rem 0;
+    }
+
+    footer {
+      background-color: black;
+      color: white;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      padding: 5px;
+    }
+
+    /* Header */
+    #header {
+      color: black;
+      background-color: #6d3621;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 10px 20px;
+      font-family: "Poppins", sans-serif;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 3px solid transparent;
+      border-image: linear-gradient(to right, transparent, #6d3621, #2c1a12, #6d3621, white) 1;
+      z-index: 1000;
+    }
+
+    #Entrance { margin-top: 6rem; }
+
+    #song { padding: 10px; }
+
+    #loginForm, #registerForm, #developerPortal {
+      display: none;
+      margin-top: 7rem;
+    }
+
+    #developerPortal textarea {
+      width: 80%;
+      height: 300px;
+    }
+
+    /* Gradient Button */
+    .gradient-btn {
+      border: 2px solid white;
+      background: linear-gradient(to right, #5C2B18 10%, #000000 90%);
+      color: white;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .gradient-btn:hover {
+      background: linear-gradient(to right, #000000 10%, #5C2B18 90%);
+      transform: translateY(-2px);
+    }
   </style>
 </head>
 <body>
 
-<div id="header" class="animate"> 
-  <h3 class="left"><a href="index.html">IBM SONG CLOUD</a></h3>
-  <h5 class="right"><a href="#log_in" onclick="showLogin()">Log in</a></h5>
+<!-- Header -->
+<div id="header" class="animate">
+  <h3 class="left"><a href="index.html" class="gradient-btn">IBM SONG CLOUD</a></h3>
+  <div>
+    <a href="#log_in" onclick="showLogin()" class="gradient-btn">Log in</a>
+    <a href="#addSongs" class="gradient-btn">Add More Songs</a>
+  </div>
 </div>
 
 <!-- Login Form -->
@@ -74,31 +155,31 @@
   <p><a href="#" onclick="showLogin()">Back to login</a></p>
 </div>
 
-<!-- Main Content for Users -->
-<div id="Entrance" class="animate">
+<!-- Main Content -->
+<div id="Entrance" class="animate" style="display: none;">
   <h1>Welcome to IBM's Lyrical Song Cloud!</h1>
-  <p>Begin by searching the song you want: </p>
+  <p>Begin by searching the song you want:</p>
   <h2>Song Search</h2>
   <input type="text" id="searchBox" placeholder="Type to search..." onkeyup="searchSites()">
   <ul id="results"></ul>
 </div>
 
 <!-- Song Links -->
-<div id="song">
+<div id="song" style="display: none;">
   <script>
     const sites = [
-      { name: "Finally Song", url: "Finally.html", target: "_blank"},
-      { name: "Fire", url: "fire.html", target: "_blank"},
-      { name: "It is raining", url: "it_is_raining.html", target: "_blank"},
-      { name: "", url: "products.html", target: "_blank"},
-      { name: "", url: "profile.html", target: "_blank"}
+      { name: "Finally Song", url: "Finally.html", target: "_blank" },
+      { name: "Fire", url: "fire.html", target: "_blank" },
+      { name: "It is raining", url: "it_is_raining.html", target: "_blank" },
+      { name: "Products", url: "products.html", target: "_blank" },
+      { name: "Profile", url: "profile.html", target: "_blank" }
     ];
 
     function searchSites() {
       const input = document.getElementById("searchBox").value.toLowerCase();
       const results = document.getElementById("results");
-      results.innerHTML = ""; 
-      if (input.length === 0) return; 
+      results.innerHTML = "";
+      if (input.length === 0) return;
       const matches = sites.filter(site => site.name.toLowerCase().startsWith(input));
       matches.forEach(site => {
         const li = document.createElement("li");
@@ -114,17 +195,19 @@
 </div>
 
 <!-- Developer Portal -->
-<div id="developerPortal">
+<div id="developerPortal" class="animate">
   <h3>Developer Portal</h3>
   <p>Edit the page code below and save changes:</p>
   <textarea id="codeEditor"></textarea><br>
   <button onclick="saveCode()">Save Changes</button>
 </div>
 
-<footer>©IBM Church Rights Reserved</footer>
+<!-- Footer -->
+<footer>© IBM Church Rights Reserved</footer>
 
+<!-- Scripts -->
 <script>
-  // Users storage with localStorage
+  // Users storage
   let users = JSON.parse(localStorage.getItem('users')) || [
     { username: "user1", password: "1234", role: "user" },
     { username: "dev", password: "devpass", role: "developer" }
@@ -159,6 +242,8 @@
       document.getElementById('codeEditor').value = document.documentElement.innerHTML;
     } else {
       alert('Logged in as normal user!');
+      document.getElementById('Entrance').style.display = 'block';
+      document.getElementById('song').style.display = 'block';
     }
   }
 
@@ -176,7 +261,7 @@
       return;
     }
 
-    const newUser = { username: username, password: password, role: "user" };
+    const newUser = { username, password, role: "user" };
     users.push(newUser);
     localStorage.setItem('users', JSON.stringify(users));
 
@@ -194,30 +279,22 @@
     alert('Code preview opened in new window!');
   }
 
+  // GSAP Animations
   gsap.registerPlugin(ScrollTrigger);
-
-gsap.utils.toArray(".animate").forEach(el => {
-  gsap.from(el, {
-    y: 100,
-    opacity: 0,
-    duration: 1,
-    ease: "power3.out",
-    scrollTrigger: {
-      trigger: el,
-      start: "top 80%",
-      toggleActions: "play none none none",
-      once: true
-    }
+  gsap.utils.toArray(".animate").forEach(el => {
+    gsap.from(el, {
+      y: 100,
+      opacity: 0,
+      duration: 1,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: el,
+        start: "top 80%",
+        toggleActions: "play none none none",
+        once: true
+      }
+    });
   });
-});
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
