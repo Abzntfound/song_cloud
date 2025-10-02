@@ -1,0 +1,30 @@
+    body { font-family: Arial, sans-serif; margin: 20px; text-align: center; background-color: white;}
+    h1 {font-size: 3rem;}
+    p {font-size: larger;}
+    input { width: 300px; padding: 8px; margin: 5px 0;}
+    ul { list-style-type: none; padding: 0; }
+    li { margin: 5px 0; }
+    a { text-decoration: none; color: blue; }
+    a:hover { text-decoration: underline; }
+    hr {background-color: black; height: 0.5rem; box-shadow: 0 0 10px black}
+    footer {background-color: black; color: white; position: fixed; bottom: 0; left: 0; width: 100%; text-align: center; padding: 5px;}
+    #header {color: black; background-color: white; position: fixed; top: 0; left: 0; width: 100%; padding: 5px 15px; font-family: "Poppins", sans-serif; display: flex; gap: 70rem; align-items: center; border-bottom: 1px solid #ccc; border-bottom: 3px solid transparent; border-image: linear-gradient(to right, transparent,  #6d3621, #2c1a12, #6d3621, white) 1; background-color:  #6d3621;}
+    #Entrance {color: black; text-align: center; margin-top: 6rem;}
+    #song {border: 0.6rem black; padding: 10px;}
+    #loginForm, #registerForm, #developerPortal { display: none; margin-top: 7rem; }
+    #developerPortal textarea { width: 80%; height: 300px; }
+    #header .left { font-weight: bold; }
+
+hr {
+  border: 0;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent 30%,
+    black 50%,
+    transparent 70%
+  );
+  margin-top: 7rem;
+}
+    #header .right { font-size: 0.9rem; color: #555; }
+    a:link, a:visited, a:hover, a:active {color: black;}
