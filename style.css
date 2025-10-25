@@ -9,7 +9,7 @@
     hr {background-color: black; height: 0.5rem; box-shadow: 0 0 10px black}
     footer {background-color: black; color: white; position: fixed; bottom: 0; left: 0; width: 100%; text-align: center; padding: 5px;}
     #header {color: black; background-color: white; position: fixed; top: 0; left: 0; width: 100%; padding: 5px 15px; font-family: "Poppins", sans-serif; display: flex; justify-content: space-evenly; align-items: center; border-bottom: 1px solid #ccc; border-bottom: 3px solid transparent; border-image: linear-gradient(to right, transparent,  #6d3621, #2c1a12, #6d3621, white) 1; background-color:  #6d3621;}
-    #Entrance {color: black; text-align: center; margin-top: 6rem;}
+    #Entrance {color: black; text-align: center; margin-top: 6rem; justify-content: center; display: flex;}
     #song {border: 0.6rem black; padding: 10px;}
     #loginForm, #registerForm, #developerPortal { display: none; margin-top: 7rem; }
     #developerPortal textarea { width: 80%; height: 300px; }
